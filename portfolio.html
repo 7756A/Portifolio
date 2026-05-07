@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Sydney Muendo — Developer Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --blue: #185FA5;
+    --blue-light: #E6F1FB;
+    --blue-dark: #0C447C;
+    --green: #1D9E75;
+    --green-light: #EAF3DE;
+    --green-dark: #27500A;
+    --red: #A32D2D;
+    --red-light: #FCEBEB;
+    --amber: #BA7517;
+    --amber-light: #FAEEDA;
+    --purple: #534AB7;
+    --purple-light: #EEEDFE;
+    --gray: #5F5E5A;
+    --gray-light: #F1EFE8;
+    --text: #1a1a1a;
+    --text-secondary: #5a5a5a;
+    --bg: #ffffff;
+    --bg-secondary: #f7f6f2;
+    --border: rgba(0,0,0,0.1);
+    --radius: 12px;
+    --radius-sm: 8px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.7;
+    font-size: 16px;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 0.5px solid var(--border);
+    padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 60px;
+  }
+  .nav-brand {
+    font-size: 15px; font-weight: 600; color: var(--text);
+    text-decoration: none; letter-spacing: -0.02em;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-size: 14px; color: var(--text-secondary);
+    text-decoration: none; transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--blue); }
+
+  /* LAYOUT */
+  .container { max-width: 900px; margin: 0 auto; padding: 0 2rem; }
+
+  /* HERO */
+  .hero {
+    padding: 5rem 0 4rem;
+    border-bottom: 0.5px solid var(--border);
+  }
+  .hero-inner { display: flex; align-items: center; gap: 2.5rem; }
+  .avatar {
+    width: 96px; height: 96px; border-radius: 50%;
+    background: var(--blue); color: var(--blue-light);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 32px; font-weight: 600; flex-shrink: 0;
+    letter-spacing: -0.02em;
+  }
+  .hero-text h1 {
+    font-size: 36px; font-weight: 600; letter-spacing: -0.03em;
+    color: var(--text); margin-bottom: 6px;
+  }
+  .hero-text .role {
+    font-size: 16px; color: var(--text-secondary); margin-bottom: 20px;
+  }
+  .contact-row { display: flex; flex-wrap: wrap; gap: 16px; }
+  .contact-item {
+    display: flex; align-items: center; gap: 7px;
+    font-size: 13px; color: var(--text-secondary);
+    text-decoration: none;
+  }
+  .contact-item:hover { color: var(--blue); }
+  .contact-item svg { width: 15px; height: 15px; flex-shrink: 0; }
+
+  /* SECTION */
+  section { padding: 3.5rem 0; border-bottom: 0.5px solid var(--border); }
+  section:last-child { border-bottom: none; }
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px; font-weight: 500; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--blue);
+    margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .section-label::after {
+    content: ''; flex: 1; height: 0.5px; background: var(--border);
+  }
+
+  /* ABOUT */
+  .about-text {
+    font-size: 15px; color: var(--text-secondary); max-width: 640px; line-height: 1.8;
+  }
+
+  /* SKILLS */
+  .skills-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px;
+  }
+  .skill-card {
+    background: var(--bg-secondary); border: 0.5px solid var(--border);
+    border-radius: var(--radius-sm); padding: 14px 16px;
+    display: flex; align-items: center; gap: 10px;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .skill-card:hover { background: #fff; border-color: rgba(0,0,0,0.2); }
+  .skill-icon { font-size: 20px; }
+  .skill-card span { font-size: 14px; font-weight: 500; color: var(--text); }
+
+  /* PROJECTS */
+  .projects-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 14px;
+  }
+  .project-card {
+    background: var(--bg); border: 0.5px solid var(--border);
+    border-radius: var(--radius); padding: 1.25rem 1.5rem;
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+  .project-card:hover { box-shadow: 0 4px 24px rgba(0,0,0,0.07); transform: translateY(-2px); }
+  .project-tag {
+    display: inline-block; font-size: 11px; font-weight: 500;
+    padding: 3px 10px; border-radius: 6px; margin-bottom: 12px;
+    font-family: 'DM Mono', monospace;
+  }
+  .tag-blue { background: var(--blue-light); color: var(--blue-dark); }
+  .tag-green { background: var(--green-light); color: var(--green-dark); }
+  .tag-red { background: var(--red-light); color: var(--red); }
+  .project-card h3 { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 8px; }
+  .project-card p { font-size: 13px; color: var(--text-secondary); line-height: 1.7; }
+
+  /* EDUCATION */
+  .edu-list { display: flex; flex-direction: column; gap: 16px; }
+  .edu-card {
+    display: flex; gap: 1.5rem; align-items: flex-start;
+    background: var(--bg-secondary); border: 0.5px solid var(--border);
+    border-radius: var(--radius); padding: 1.25rem 1.5rem;
+  }
+  .edu-icon {
+    width: 40px; height: 40px; border-radius: 10px;
+    background: var(--purple-light); color: var(--purple);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .edu-icon.cert { background: var(--amber-light); color: var(--amber); }
+  .edu-info h3 { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 3px; }
+  .edu-info .inst { font-size: 13px; color: var(--blue); font-weight: 500; margin-bottom: 3px; }
+  .edu-info .year {
+    font-size: 12px; color: var(--text-secondary);
+    font-family: 'DM Mono', monospace;
+  }
+
+  /* CERTIFICATES */
+  .certs-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px;
+  }
+  .cert-card {
+    background: var(--bg); border: 0.5px solid var(--border);
+    border-radius: var(--radius-sm); padding: 1rem 1.25rem;
+    display: flex; gap: 12px; align-items: flex-start;
+  }
+  .cert-badge {
+    width: 36px; height: 36px; border-radius: 8px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center; font-size: 16px;
+  }
+  .cert-badge.b1 { background: var(--amber-light); color: var(--amber); }
+  .cert-badge.b2 { background: var(--green-light); color: var(--green); }
+  .cert-badge.b3 { background: var(--blue-light); color: var(--blue); }
+  .cert-badge.b4 { background: var(--red-light); color: var(--red); }
+  .cert-info h4 { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 2px; }
+  .cert-info p { font-size: 12px; color: var(--text-secondary); }
+
+  /* CTA */
+  .cta-section { text-align: center; padding: 4rem 0; }
+  .cta-section h2 { font-size: 28px; font-weight: 600; letter-spacing: -0.02em; margin-bottom: 10px; }
+  .cta-section p { font-size: 15px; color: var(--text-secondary); margin-bottom: 28px; }
+  .cta-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--blue); color: #fff;
+    padding: 12px 28px; border-radius: var(--radius-sm);
+    text-decoration: none; font-size: 14px; font-weight: 500;
+    transition: background 0.2s;
+  }
+  .cta-btn:hover { background: var(--blue-dark); }
+
+  /* FOOTER */
+  footer {
+    background: var(--bg-secondary); border-top: 0.5px solid var(--border);
+    padding: 1.5rem 2rem; text-align: center;
+    font-size: 13px; color: var(--text-secondary);
+  }
+
+  @media (max-width: 600px) {
+    .hero-inner { flex-direction: column; align-items: flex-start; gap: 1.25rem; }
+    .hero-text h1 { font-size: 26px; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-brand" href="#">Sydney Muendo</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="container">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="avatar">SM</div>
+      <div class="hero-text">
+        <h1>Sydney Muendo</h1>
+        <p class="role">Software Developer</p>
+        <div class="contact-row">
+          <a class="contact-item" href="mailto:sydneymuendo45@gmail.com">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
+            sydneymuendo45@gmail.com
+          </a>
+          <a class="contact-item" href="https://github.com/7756A" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
+            github.com/7756A
+          </a>
+          <span class="contact-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+            Kenya
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-label">About</div>
+    <p class="about-text">A passionate and versatile developer with hands on experience in software development, networking and cybersecurity. I build robust applications with Python and React JS, explore AI-driven solutions and apply ethical hacking principles to identify and address security vulnerabilities. Proficient in Kali Linux and committed to continuous learning in a rapidly evolving tech landscape.</p>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="section-label">Skills &amp; Technologies</div>
+    <div class="skills-grid">
+      <div class="skill-card"><span class="skill-icon">🐍</span><span>Python</span></div>
+      <div class="skill-card"><span class="skill-icon">⚛️</span><span>React JS</span></div>
+      <div class="skill-card"><span class="skill-icon">🌐</span><span>Networking</span></div>
+      <div class="skill-card"><span class="skill-icon">🤖</span><span>AI / ML</span></div>
+      <div class="skill-card"><span class="skill-icon">🔐</span><span>Ethical Hacking</span></div>
+      <div class="skill-card"><span class="skill-icon">🖥️</span><span>Kali Linux</span></div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="section-label">Featured Projects</div>
+    <div class="projects-grid">
+      <div class="project-card">
+        <span class="project-tag tag-blue">Flutter · Dart</span>
+        <h3>Muilt-Tenant Carwash Platform</h3>
+        <p>A multi-tenant carwash management app built with Flutter, allowing multiple carwash businesses to manage bookings, customers, and operations from a single platform.</p>
+      </div>
+      <div class="project-card">
+        <span class="project-tag tag-green">React JS</span>
+        <h3>Portfolio Dashboard</h3>
+        <p>A responsive personal dashboard built with React JS, showcasing projects, skills, and professional accomplishments.</p>
+      </div>
+      <div class="project-card">
+        <span class="project-tag tag-red">Security · Kali</span>
+        <h3>Network Vulnerability Scanner</h3>
+        <p>A Python tool to scan and detect open ports and potential vulnerabilities on local networks using ethical hacking techniques.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <div class="section-label">Education</div>
+    <div class="edu-list">
+      <div class="edu-card">
+        <div class="edu-icon">🎓</div>
+        <div class="edu-info">
+          <h3>Bachelor of Science in Computer Science</h3>
+          <div class="inst">Karatina University</div>
+          <div class="year">2022 – 2026</div>
+        </div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-icon">📘</div>
+        <div class="edu-info">
+          <h3>Ngoto Boys High School</h3>
+          <div class="inst">Kenya National Examinations Council</div>
+          <div class="year">2017 – 2020</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CERTIFICATES -->
+  <section>
+    <div class="section-label">Certifications</div>
+    <div class="certs-grid">
+      <div class="cert-card">
+        <div class="cert-badge b1">🏅</div>
+        <div class="cert-info">
+          <h4>HC-AI</h4>
+          <p>HUAWEI · 2025</p>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-badge b2">🏅</div>
+        <div class="cert-info">
+          <h4>Ethical Hacking</h4>
+          <p>CISCO ·  2026</p>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-badge b3">🏅</div>
+        <div class="cert-info">
+          <h4>Designing Networks</h4>
+          <p>ISOC · 2026</p>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-badge b4">🏅</div>
+        <div class="cert-info">
+          <h4>Initial Network Configuration</h4>
+          <p>Cisco · 2026</p>
+        </div>
+      </div>
+    
+    <div class="cert-card">
+            <div class="cert-badge b4">🏅</div>
+            <div class="cert-info">
+            <h4>Kali linux fundamentals</h4>
+            <p>Red Hat · 2026</p>
+            </div>
+        </div>
+    </div>  
+    <div class="cert-card">
+            <div class="cert-badge b4">🏅</div>
+            <div class="cert-info">
+            <h4>Building Wireless Community Networks</h4>
+            <p>ISOC · 2026</p>
+            </div>
+        </div>              
+  </section>
+
+  <!-- CONTACT CTA -->
+  <div class="cta-section" id="contact">
+    <h2>Let's work together</h2>
+    <p>Open to freelance, internship and full time opportunities. Feel free to reach out.</p>
+    <a class="cta-btn" href="mailto:sydney@email.com">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
+      Get in touch
+    </a>
+  </div>
+
+</div>
+
+<footer>
+  &copy; 2026 Sydney Muendo · Built with passion for code &amp; security
+</footer>
+
+</body>
+</html>
